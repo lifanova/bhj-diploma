@@ -36,8 +36,11 @@ const createRequest = (options = {}) => {
         } else {
             for (let key in options.data) {
                 formData.append(key, options.data[key]);
+                console.log(key, options.data[key]);
             }
-            
+            console.log(formData);
+
+            console.log(options.method, options.url);
             xhr.open(options.method, options.url);
             xhr.send(formData);
         }
