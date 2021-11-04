@@ -33,11 +33,8 @@ class AccountsWidget {
             modal.open();
         }
 
-        document.querySelector(".accounts-panel").addEventListener("click", e => {
-            if (e.target.closest(".account")) {
-                this.onSelectAccount(e.target.closest(".account"))
-            }
-        });
+        const item = document.querySelector(".accounts-panel");
+        item.addEventListener("click", this.onSelectAccount);
     }
 
     /**
@@ -69,7 +66,7 @@ class AccountsWidget {
      * */
     clear() {
         const currentAccounts = Array.from(document.querySelectorAll('.account'));
-        currentAccounts.forEach ((item) => {
+        currentAccounts.forEach((item) => {
             item.remove();
         });
     }
@@ -81,14 +78,16 @@ class AccountsWidget {
      * счёта класс .active.
      * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
      * */
-    onSelectAccount(element) {
-        const selectedItem = document.querySelector('.active');
-        if (selectedItem) {
-            selectedItem.classList.remove('active');
+    onSelectAccount(event) {
+        let activeItems = Array.from(document.querySelectorAll('.active'));
+        for (let item of activeItems) {
+            item.classList.remove('active');
         }
-        element.currentTarget.classList.add('active');
-        const id = element.currentTarget.dataset.id;
-        App.showPage('transactions', {account_id: id});
+
+        let element = event.target.closest('.account');
+        element.classList.add('active');
+
+        App.showPage('transactions', {account_id: element.dataset.id});
     }
 
     /**
