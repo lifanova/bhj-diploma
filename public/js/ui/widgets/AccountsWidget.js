@@ -48,10 +48,10 @@ class AccountsWidget {
      * метода renderItem()
      * */
     update() {
-        let current = User.current();
+        let current = this.current();
         if (current) {
             Account.list(current, (err, response) => {
-                if (response && response.success === true) {
+                if (response && response.success) {
                     this.clear();
                     this.renderItem(response.data);
                 }

@@ -26,17 +26,15 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user
+    return JSON.parse(localStorage.getItem("user"));
   }
 
   /**
    * Получает информацию о текущем
    * авторизованном пользователе.
    * */
-  static fetch(data, callback = f => f) {
-    return createRequest({
-      data: data,
+  static fetch(callback = f => f) {
+    return createRequest({      
       url: this.URL + "/current",
       method: "GET",
       responseType: "json",
@@ -90,7 +88,8 @@ class User {
         if (response && response.user) {
           User.setCurrent(response.user);
         }
-        callback(err, response)
+
+        callback(err, response);
       }
     });
   }
@@ -99,9 +98,8 @@ class User {
    * Производит выход из приложения. После успешного
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
-  static logout(data, callback = f => f) {
-    return createRequest({
-      data: data,
+  static logout(callback = f => f) {
+    return createRequest({      
       url: this.URL + "/logout",
       method: "POST",
       responseType: "json",
@@ -110,7 +108,7 @@ class User {
           User.unsetCurrent();
         }
 
-        callback(err, response)
+        callback(err, response);
       }
     });
   }

@@ -42,23 +42,21 @@ class Sidebar {
 
     register.addEventListener("click", (event) => {
       event.preventDefault();
-      let elem = App.getModal("register");
-      elem.open();
-    })
+      App.getModal("register").open();      
+    });
 
     login.addEventListener("click", (event) => {
       event.preventDefault();
-      let elem = App.getModal("login");
-      elem.open();
-    })
+      App.getModal("login").open();      
+    });
 
     logout.addEventListener("click", (event) => {
       event.preventDefault();
-      User.logout({}, (err, response) => {
+      User.logout((err, response) => {
         if (response.success) {
           App.setState("init");
         }
-      })
+      });
     });
   }
 }

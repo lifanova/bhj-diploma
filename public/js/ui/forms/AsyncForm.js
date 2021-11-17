@@ -55,8 +55,7 @@ class AsyncForm {
    * Вызывает метод onSubmit и передаёт туда
    * данные, полученные из метода getData()
    * */
-  submit() {
-    let options = {data: this.getData()};
-    this.onSubmit(options);
+  submit() {    
+    this.onSubmit(this.getData());
   }
 }
